@@ -34,7 +34,7 @@
             <div class="col-md-9">
               <h5 th:text="${service.Name}"></h5>
               <p th:text="${service.Description}"></p>
-              <span class="text-muted" th:text="'Giá: ' + ${service.Price}"></span>
+              <span class="text-muted" th:text="'Giá: ' + ${#numbers.formatDecimal(service.Price, 0, 'COMMA', 0, 'POINT')} + ' VND'"></span>
             </div>
             <div class="col-md-10">
                 <a th:href="@{'/admin/services/services/edit/' + ${service.id}}" class="btn btn-sm btn-warning">Chỉnh sửa</a>

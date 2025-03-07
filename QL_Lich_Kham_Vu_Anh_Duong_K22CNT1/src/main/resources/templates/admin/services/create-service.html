@@ -15,15 +15,15 @@
         <form th:action="@{/admin/services/services/create}" th:object="${service}" method="post">
           <div class="form-group">
             <label for="name">Tên dịch vụ</label>
-            <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Nhập tên dịch vụ">
+            <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Nhập tên dịch vụ" required>
           </div>
           <div class="form-group">
             <label for="description">Mô tả</label>
-            <textarea th:field="*{description}" class="form-control" id="description" placeholder="Nhập mô tả"></textarea>
+            <textarea th:field="*{description}" class="form-control" id="description" placeholder="Nhập mô tả" required></textarea>
           </div>
           <div class="form-group">
             <label for="price">Giá</label>
-            <input type="number" th:field="*{price}" class="form-control" id="price" placeholder="Nhập giá">
+            <input type="number" th:field="*{price}" class="form-control" id="price" placeholder="Nhập giá" required>
           </div>
           <button type="submit" class="btn btn-primary">Tạo mới</button>
           <a th:href="@{/admin/services/services}" class="btn btn-secondary">Hủy</a>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Quản lý lịch khám</title>
+<!-- Liên kết tới CSS của dashboard (chứa layout chung) -->
+<link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
+<!-- Liên kết tới CSS riêng của sidebar -->
+<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+<!-- Liên kết tới Bootstrap CSS qua CDN -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+	<!-- Bao bọc toàn bộ trang theo cấu trúc flex như dashboard -->
+	<div class="wrapper"
+		style="display: flex; min-height: 100vh; background: #f9fafb;">
+
+		<!-- Nhúng sidebar (đảm bảo file sidebar.html nằm đúng thư mục và tên fragment khớp) -->
+		<div th:replace="~{admin/sidebar :: sidebar}"></div>
+
+		<!-- Nội dung chính -->
+		<main class="main-content">
+			<div class="container mt-5">
+				<h1 class="mb-4 text-center">Danh sách lịch khám</h1>
+
+				<!-- Nút tạo mới (nếu có chức năng tạo mới lịch khám) -->
+
+
+				<!-- Bảng hiển thị danh sách lịch khám -->
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Họ tên bệnh nhân</th>
+							<th>Họ tên bác sĩ</th>
+							<th>Giờ khám</th>
+							<th>Ngày khám</th>
+							<th>Trạng thái</th>
+							<th>Hành động</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- Duyệt qua danh sách appointments được truyền từ Controller -->
+						<tr th:each="appointment : ${appointments}">
+							<td th:text="${appointment.id}"></td>
+							<td th:text="${appointment.user.fullname}">Tên bệnh nhân</td>
+							<td th:text="${appointment.doctor.fullname}">Tên bác sĩ</td>
+							<td th:text="${appointment.vadTime}">Giờ khám</td>
+							<td th:text="${appointment.vadDate}">Ngày khám</td>
+							<td th:text="${appointment.vadStatus}">Trạng thái</td>
+							<td>
+								<!-- Nút chỉnh sửa lịch khám --> <a
+								th:href="@{'/admin/appointments/appointments/edit/' + ${appointment.id}}"
+								class="btn btn-sm btn-warning"> Chỉnh sửa </a> <!-- Nút xóa lịch khám -->
+								<a
+								th:href="@{'/admin/appointments/appointments/delete/' + ${appointment.id}}"
+								class="btn btn-sm btn-danger"
+								onclick="return confirm('Bạn có chắc chắn muốn xóa lịch khám này?');">
+									Xóa </a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</main>
+	</div>
+
+	<!-- Bootstrap JS và các phụ thuộc qua CDN -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.model.VadAppointments;
 import com.model.VadServices;
 import com.model.VadUser;
+import com.repository.VadAppointmentsRepository;
 import com.repository.VadServicesRepository;
 import com.repository.VadUserRepository;
 
@@ -29,6 +31,9 @@ public class VadAdminController {
 	
 	@Autowired
 	private VadUserRepository userRepository;
+	
+	@Autowired
+	private VadAppointmentsRepository appointmentsRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -52,13 +57,13 @@ public class VadAdminController {
     @GetMapping("services/services/create")
     public String showCreateForm(Model model) {
         model.addAttribute("service", new VadServices());
-        return "admin/services/services/create-service"; // Trang form tạo mới
+        return "admin/services/create-service"; // Trang form tạo mới
     }
     
     @PostMapping("services/services/create")
     public String createService(@ModelAttribute("service") VadServices service) {
         servicesRepository.save(service);
-        return "redirect:/admin/services";
+        return "redirect:/admin/services/services";
     }
     
     // UPDATE: Hiển thị form chỉnh sửa dịch vụ
@@ -98,7 +103,7 @@ public class VadAdminController {
         return "admin/users/users";
     }
     
- // UPDATE: Hiển thị form chỉnh sửa dịch vụ
+    // UPDATE: Hiển thị form chỉnh sửa người dùng
     @GetMapping("users/users/edit/{id}")
     public String showEditUserForm(@PathVariable("id") Long id, Model model) {
         Optional<VadUser> userOpt = userRepository.findById(id);
@@ -109,7 +114,7 @@ public class VadAdminController {
         return "redirect:/admin/users";
     }
 
-    // UPDATE: Xử lý form chỉnh sửa dịch vụ
+    // UPDATE: Xử lý form chỉnh người dùng
     @PostMapping("users/users/edit/{id}")
     public String updateUser(@PathVariable("id") Long id, @ModelAttribute("user") VadUser user) {
         Optional<VadUser> existingUserOpt = userRepository.findById(id);
@@ -132,6 +137,64 @@ public class VadAdminController {
         }
         return "redirect:/admin/users/users";
     }
+    	
+    // DELETE: Xóa người dùng
+    @GetMapping("users/users/delete/{id}")
+    public String deleteUsers(@PathVariable("id") Long id) {
+        userRepository.deleteById(id);
+        return "redirect:/admin/users/users";
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    @GetMapping("/appointments/appointments")
+    public String adminAppointment(Model model) {
+        model.addAttribute("title", "Quản lý lịch khám");
+        
+        List<VadAppointments> appointments = appointmentsRepository.findAll();
+		model.addAttribute("appointments", appointments);
+		
+        return "admin/appointments/appointments";
+    }
+    
+ // GET: Hiển thị form chỉnh sửa lịch khám tại URL: /admin/appointments/appointments/edit/{id}
+    @GetMapping("/appointments/appointments/edit/{id}")
+    public String showEditAppointmentForm(@PathVariable("id") Long id, Model model) {
+        Optional<VadAppointments> appointmentOpt = appointmentsRepository.findById(id);
+        if (appointmentOpt.isPresent()) {
+            model.addAttribute("appointment", appointmentOpt.get());
+            return "admin/appointments/edit-appointments"; // Template form chỉnh sửa
+        }
+        return "redirect:/admin/appointments/appointments";
+    }
 
+    // POST: Xử lý form chỉnh sửa lịch khám tại URL: /admin/appointments/appointments/edit/{id}
+    @PostMapping("/appointments/appointments/edit/{id}")
+    public String updateAppointments(@PathVariable("id") Long id,
+        @ModelAttribute("appointment") VadAppointments appointmentForm) {
+        
+        // Lấy đối tượng lịch khám ban đầu từ DB
+        VadAppointments appointment = appointmentsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id:" + id));
+        
+        // Nếu trường ngày từ form không null thì cập nhật, nếu null giữ lại giá trị cũ
+        if (appointmentForm.getVadDate() != null) {
+            appointment.setVadDate(appointmentForm.getVadDate());
+        }
+        // Các trường khác (giờ, trạng thái, …)
+        appointment.setVadTime(appointmentForm.getVadTime());
+        appointment.setVadStatus(appointmentForm.getVadStatus());
+        
+        // Không thay đổi thuộc tính doctor (giá trị cũ được giữ lại)
+        
+        appointmentsRepository.save(appointment);
+        return "redirect:/admin/appointments/appointments";
+    }
+    
+    // DELETE: Xóa lịch
+    @GetMapping("appointments/appointments/delete/{id}")
+    public String deleteAppointments(@PathVariable("id") Long id) {
+    	appointmentsRepository.deleteById(id);
+        return "redirect:/admin/appointments/appointments";
+    }
     
 }

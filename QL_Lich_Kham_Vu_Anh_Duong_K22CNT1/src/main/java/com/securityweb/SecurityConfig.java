@@ -26,6 +26,7 @@ public class SecurityConfig {
             	.requestMatchers("https://code.jquery.com https://cdn.jsdelivr.net","https://maxcdn.bootstrapcdn.com; " ,
                                        "https://code.jquery.com","https://cdn.jsdelivr.net","https://maxcdn.bootstrapcdn.com; " ,
                                        "https://cdn.jsdelivr.net","https://maxcdn.bootstrapcdn.com;").permitAll()
+            	.requestMatchers("/appointments").authenticated()
                 .anyRequest().permitAll()
             )
             .formLogin(login -> login
