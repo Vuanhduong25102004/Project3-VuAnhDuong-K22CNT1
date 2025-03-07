@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Quản lý Dịch vụ</title>
+  <!-- Liên kết tới CSS của dashboard (chứa layout chung) -->
+  <link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
+  <!-- Liên kết tới CSS riêng của sidebar -->
+  <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+  <!-- Liên kết tới Bootstrap CSS qua CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+</head>
+
+<body>
+  <!-- Bao bọc toàn bộ trang theo cấu trúc flex như dashboard -->
+  <div class="wrapper" style="display: flex; min-height: 100vh; background: #f9fafb;">
+    
+    <!-- Nhúng sidebar (đảm bảo file sidebar.html nằm đúng thư mục và tên fragment khớp) -->
+    <div th:replace="~{admin/sidebar :: sidebar}"></div>
+    
+    <!-- Nội dung chính -->
+     <main class="main-content">
+    <div class="container mt-5">
+      <h1 class="mb-4 text-center">Danh sách dịch vụ</h1>
+       <!-- Nút tạo mới dịch vụ -->
+        <div class="mb-3 text-right">
+          <a th:href="@{/admin/services/services/create}" class="btn btn-primary">Tạo mới dịch vụ</a>
+        </div>
+      <!-- Sử dụng list-group của Bootstrap -->
+      <ul class="list-group">
+        <!-- Lặp qua từng service -->
+        <li class="list-group-item" th:each="service : ${services}">
+          <div class="row">
+            <div class="col-md-9">
+              <h5 th:text="${service.Name}"></h5>
+              <p th:text="${service.Description}"></p>
+              <span class="text-muted" th:text="'Giá: ' + ${service.Price}"></span>
+            </div>
+            <div class="col-md-10">
+                <a th:href="@{'/admin/services/services/edit/' + ${service.id}}" class="btn btn-sm btn-warning">Chỉnh sửa</a>
+                <a th:href="@{'/admin/services/services/delete/' + ${service.id}}"
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Bạn có chắc chắn muốn xóa dịch vụ này?');">
+                   Xóa
+                </a>
+              </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </main>
+  </div>
+   <!-- Bootstrap JS và các phụ thuộc (jQuery, Popper.js) qua CDN -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

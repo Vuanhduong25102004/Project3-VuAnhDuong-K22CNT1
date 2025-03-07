@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Chỉnh sửa Dịch vụ</title>
+  <link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
+  <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="wrapper" style="display: flex; min-height: 100vh; background: #f9fafb;">
+    <div th:replace="~{admin/sidebar :: sidebar}"></div>
+    <main class="main-content">
+      <div class="container mt-5">
+        <h1 class="mb-4 text-center">Chỉnh sửa Dịch vụ</h1>
+        <form th:action="@{'/admin/services/services/edit/' + ${service.id}}" th:object="${service}" method="post">
+          <div class="form-group">
+            <label for="name">Tên dịch vụ</label>
+            <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Nhập tên dịch vụ">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea th:field="*{description}" class="form-control" id="description" placeholder="Nhập mô tả"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="number" th:field="*{price}" class="form-control" id="price" placeholder="Nhập giá">
+          </div>
+          <button type="submit" class="btn btn-primary">Cập nhật</button>
+          <a th:href="@{/admin/services/services}" class="btn btn-secondary">Hủy</a>
+        </form>
+      </div>
+    </main>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header của sidebar */
+.sidebar-header {
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sidebar-header .logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.sidebar-header .search-box {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Menu của sidebar */
+.sidebar-menu {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+.sidebar-menu ul {
+  list-style: none;
+}
+.sidebar-menu li {
+  margin-bottom: 1rem;
+}
+.sidebar-menu a {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+.sidebar-menu a:hover {
+  color: #1a73e8;
+}
+
+/* Footer của sidebar */
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid #ddd;
+}
+.sidebar-footer ul {
+  list-style: none;
+}
+.sidebar-footer li {
+  margin-bottom: 1rem;
+}
+.sidebar-footer a {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+.sidebar-footer a:hover {
+  color: #1a73e8;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <!-- Liên kết tới CSS của trang chính -->
+  <link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
+  <!-- Liên kết tới CSS của sidebar -->
+  <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>  
+<div class="wrapper" style="display: flex; min-height: 100vh; background: #f9fafb;">
+  <!-- Nhúng sidebar từ file sidebar.html -->
+  <div th:replace="~{admin/sidebar :: sidebar}"></div>
+
+  <!-- Phần nội dung chính -->
+  <main class="main-content">
+    <div class="page-header">
+      <h2>Phòng khám Thiên An</h2>
+      <div class="sub-info">
+        <span class="status-badge">Certified</span>
+        <p>Manager: <strong>Jessica Parker</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chart">
+        <p>Biểu đồ ngân sách (placeholder)</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Consolidated Budget</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Deals</th>
+            <th>Email</th>
+            <th>Cost</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Academic Project</td>
+            <td>academic@example.com</td>
+            <td>$3,452</td>
+            <td><span class="tag in-progress">In Progress</span></td>
+          </tr>
+          <tr>
+            <td>Back Menu Production</td>
+            <td>production@example.com</td>
+            <td>$1,238</td>
+            <td><span class="tag completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td>Product Launch</td>
+            <td>launch@example.com</td>
+            <td>$5,102</td>
+            <td><span class="tag in-progress">In Progress</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+   </div>
+</body>
+</html>

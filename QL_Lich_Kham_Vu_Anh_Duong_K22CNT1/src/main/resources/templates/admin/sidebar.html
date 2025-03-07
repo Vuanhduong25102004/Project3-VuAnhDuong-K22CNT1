@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <!-- Đánh dấu th:fragment để có thể include sidebar này -->
+  <aside class="sidebar" th:fragment="sidebar">
+    <!-- Header trên cùng sidebar -->
+    <div class="sidebar-header">
+      <span class="logo"><a th:href="@{/admin/dashboard}">Phòng khám</a></span>
+      <!-- Nếu muốn thêm ô tìm kiếm, bỏ comment dòng dưới -->
+      <!-- <input type="text" placeholder="Search..." class="search-box" /> -->
+    </div>
+
+    <!-- Menu chính của sidebar -->
+    <div class="sidebar-menu">
+      <ul>
+        <li><a th:href="@{/admin/services/services}"><i class="icon"></i>Quản lý dịch vụ</a></li>
+        <li><a th:href="@{/admin/users/users}"><i class="icon"></i>Quản lý người dùng</a></li>
+        <li><a th:href="@{#}"><i class="icon"></i>Quản lý lịch khám</a></li>
+        <li><a th:href="@{#}"><i class="icon"></i>Quản lý bác sĩ</a></li>
+        <li><a th:href="@{#}"><i class="icon"></i>Quản lý hồ sơ bệnh nhân</a></li>
+      </ul>
+    </div>
+
+    <!-- Footer của sidebar -->
+    <div class="sidebar-footer">
+      <ul>
+        <li><a href="#">Help center</a></li>
+        <li><a href="#">Notifications</a></li>
+        <li><a href="#">Get full access</a></li>
+      </ul>
+      <p style="margin-top:1rem; font-size: 0.9rem;">&copy; 2025 - Vũ Anh Dương</p>
+    </div>
+  </aside>
+</body>
+</html>

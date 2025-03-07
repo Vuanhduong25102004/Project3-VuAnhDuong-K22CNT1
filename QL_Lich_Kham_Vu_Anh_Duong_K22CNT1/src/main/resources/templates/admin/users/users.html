@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Quản lý người dùng</title>
+  <!-- Liên kết tới CSS của dashboard (chứa layout chung) -->
+  <link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
+  <!-- Liên kết tới CSS riêng của sidebar -->
+  <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+  <!-- Liên kết tới Bootstrap CSS qua CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+  <!-- Bao bọc toàn bộ trang theo cấu trúc flex như dashboard -->
+  <div class="wrapper" style="display: flex; min-height: 100vh; background: #f9fafb;">
+    
+    <!-- Nhúng sidebar (đảm bảo file sidebar.html nằm đúng thư mục và tên fragment khớp) -->
+ 		<!-- Nếu sidebar.html nằm trong thư mục admin/sidebar.html thì:  -->
+      
+
+    <div th:replace="~{admin/sidebar :: sidebar}"></div>
+
+    <!-- Nội dung chính -->
+    <main class="main-content">
+      <div class="container mt-5">
+        <h1 class="mb-4 text-center">Danh sách người dùng</h1>
+        
+        <!-- Nút tạo mới (nếu bạn có chức năng tạo người dùng) -->
+        <div class="mb-3 text-right">
+          <!-- Ví dụ:
+               <a th:href="@{/admin/users/create}" class="btn btn-primary">Tạo mới người dùng</a>
+          -->
+        </div>
+
+        <!-- Bảng hiển thị danh sách người dùng -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Họ tên</th>
+              <th>Email</th>
+              <th>Điện thoại</th>
+              <th>Quyền</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Lặp qua từng user -->
+            <tr th:each="user : ${users}">
+              <td th:text="${user.id}"></td>
+              <td th:text="${user.fullname}"></td>
+              <td th:text="${user.email}"></td>
+              <td th:text="${user.phone}"></td>
+              <td th:text="${user.vadrole}"></td>
+              <td>
+                <!-- Nút Chỉnh sửa -->
+                <a th:href="@{'/admin/users/users/edit/' + ${user.id}}"
+                   class="btn btn-sm btn-warning">
+                  Chỉnh sửa
+                </a>
+                <!-- Nút Xóa -->
+                <a th:href="@{'/admin/users/delete/' + ${user.id}}"
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
+                  Xóa
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Bootstrap JS và các phụ thuộc (jQuery, Popper.js) qua CDN -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
