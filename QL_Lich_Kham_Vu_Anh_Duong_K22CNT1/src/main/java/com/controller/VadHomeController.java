@@ -13,7 +13,7 @@ import com.model.VadDoctors;
 import com.repository.VadDoctorsRepository;
 
 @Controller
-public class HomeController {
+public class VadHomeController {
 
     @Autowired
     private VadDoctorsRepository doctorsRepository;

@@ -1,0 +1,158 @@
+/* ========== CARD TỔNG THỂ ========== */
+
+/* Xóa viền mặc định và chỉnh shadow nhẹ */
+.user-card {
+  max-width: 700px !important; /* Mở rộng hơn 400px để giống ảnh minh họa */
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* ========== BỐ CỤC BÊN TRONG CARD ========== */
+
+.profile-card-body {
+  display: flex;           /* Giúp đặt avatar + nội dung cạnh nhau nếu có */
+  align-items: center;     /* Căn giữa theo trục dọc */
+  gap: 1.5rem;             /* Khoảng cách giữa avatar và info */
+  padding: 1.5rem;
+}
+
+/* Nếu bạn thêm ảnh đại diện thì dùng class .profile-img */
+.profile-img img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover; /* Cho ảnh luôn vừa khít */
+}
+
+/* ========== THÔNG TIN CHÍNH ========== */
+
+.profile-info {
+  flex: 1; /* Chiếm hết không gian còn lại bên phải */
+}
+
+/* Tên người dùng */
+.user-fullname {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* Các dòng email, điện thoại, vai trò */
+.user-contacts {
+  margin-bottom: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Nút "Sửa thông tin" */
+.edit-btn {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+  background-color: #0056b3;
+  text-decoration: none;
+  color: #fff;
+}
+/* ========== BỐ CỤC CHUNG ========== */
+.user-info-row {
+  /* row bọc cả hai cột trái - phải */
+  margin-bottom: 2rem;
+}
+
+/* ========== CỘT BÊN TRÁI (CARD) ========== */
+.user-card {
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  height: 100%; /* để card full chiều cao col */
+}
+
+/* Bên trong card: dàn ngang ảnh + info */
+.profile-card-body {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+/* Avatar */
+.profile-img img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* Bạn có thể thêm border, ví dụ: 
+     border: 2px solid #ccc; 
+  */
+}
+
+/* Thông tin (Tên, Email, Phone, Role) */
+.profile-info {
+  flex: 1; /* chiếm hết phần còn lại */
+}
+
+/* Tên user */
+.user-fullname {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Dòng email, phone, role */
+.user-contacts {
+  margin-bottom: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Nút Edit */
+.edit-btn {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 0.45rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.edit-btn:hover {
+  background-color: #0056b3;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* ========== CỘT BÊN PHẢI (THÔNG TIN CHI TIẾT) ========== */
+.user-right-col {
+  display: flex;
+  align-items: center; 
+  /* hoặc: align-items: start; tùy ý */
+  /* Nếu muốn có đường chia dọc, có thể thêm border-left: */
+  border-left: 1px solid #eee;
+  padding-left: 2rem;
+}
+
+/* Bên trong user-right-col, ta có .user-details (row row-cols-3) */
+.user-details .col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Nhãn (Sex, Age, Blood...) */
+.detail-label {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* Giá trị (Female, 28, A+...) */
+.detail-value {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}

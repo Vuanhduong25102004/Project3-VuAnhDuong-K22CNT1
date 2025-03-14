@@ -1,38 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 </head>
 <body>
-  <!-- Đánh dấu th:fragment để có thể include sidebar này -->
-  <aside class="sidebar" th:fragment="sidebar">
-    <!-- Header trên cùng sidebar -->
-    <div class="sidebar-header">
-      <span class="logo"><a th:href="@{/admin/dashboard}">Phòng khám</a></span>
-      <!-- Nếu muốn thêm ô tìm kiếm, bỏ comment dòng dưới -->
-      <!-- <input type="text" placeholder="Search..." class="search-box" /> -->
-    </div>
+	<!-- Đánh dấu th:fragment để có thể include sidebar này -->
+	<aside class="sidebar" th:fragment="sidebar">
+		<link rel="stylesheet" th:href="@{/css/all.min.css}">
+		<!-- Header trên cùng sidebar -->
+		<div class="sidebar-header">
+			<span class="logo"><a th:href="@{/admin/dashboard}">Phòng
+					khám</a></span>
+			<form th:action="@{/logout}" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" />
+				<button type="submit" class="nav-link btn btn-link"
+					style="text-decoration: none; color: #007bff;">
+					<i class="fa-solid fa-right-from-bracket"></i>
+				</button>
+			</form>
+		</div>
 
-    <!-- Menu chính của sidebar -->
-    <div class="sidebar-menu">
-      <ul>
-        <li><a th:href="@{/admin/services/services}"><i class="icon"></i>Quản lý dịch vụ</a></li>
-        <li><a th:href="@{/admin/users/users}"><i class="icon"></i>Quản lý người dùng</a></li>
-        <li><a th:href="@{/admin/appointments/appointments}"><i class="icon"></i>Quản lý lịch khám</a></li>
-        <li><a th:href="@{#}"><i class="icon"></i>Quản lý bác sĩ</a></li>
-        <li><a th:href="@{#}"><i class="icon"></i>Quản lý hồ sơ bệnh nhân</a></li>
-      </ul>
-    </div>
+		<!-- Menu chính của sidebar -->
+		<div class="sidebar-menu">
+			<ul>
+				<li><a th:href="@{/admin/services/services}"><i
+						class="fa-solid fa-tools"></i> Quản lý dịch vụ</a></li>
+				<li><a th:href="@{/admin/users/users}"><i
+						class="fa-solid fa-users"></i>Quản lý người dùng</a></li>
+				<li><a th:href="@{/admin/appointments/appointments}"><i
+						class="fa-solid fa-calendar-check"></i> Quản lý lịch khám</a></li>
+				<li><a th:href="@{/admin/doctors/doctors}"><i
+						class="fa-solid fa-user-doctor"></i>Quản lý bác sĩ</a></li>
+				<li><a th:href="@{/admin/medicalrecord/medicalrecord}"><i class="fa-solid fa-notes-medical"></i>Quản lý hồ sơ bệnh nhân</a></li>
+			</ul>
+		</div>
 
-    <!-- Footer của sidebar -->
-    <div class="sidebar-footer">
-      <ul>
-        <li><a href="#">Help center</a></li>
-        <li><a href="#">Notifications</a></li>
-        <li><a href="#">Get full access</a></li>
-      </ul>
-      <p style="margin-top:1rem; font-size: 0.9rem;">&copy; 2025 - Vũ Anh Dương</p>
-    </div>
-  </aside>
+		<!-- Footer của sidebar -->
+		<div class="sidebar-footer">
+			<ul>
+				<li><a href="#"><i class="fa-solid fa-hands-helping"></i>Help center</a></li>
+				<li><a href="#"><i class="fa-solid fa-bell"></i>Notifications</a></li>
+				<li><a href="#"><i class="fa-solid fa-key"></i>Get full access</a></li>
+			</ul>
+			<p style="margin-top: 1rem; font-size: 0.9rem;">&copy; 2025 - Vũ
+				Anh Dương</p>
+		</div>
+	</aside>
 </body>
 </html>

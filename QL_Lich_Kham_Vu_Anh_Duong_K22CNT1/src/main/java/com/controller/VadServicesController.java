@@ -11,17 +11,17 @@ import com.model.VadServices;
 import com.repository.VadServicesRepository;
 
 @Controller
-public class ServicesController {
+public class VadServicesController {
 	
 	@Autowired
 	private VadServicesRepository servicesRepository;
 	
-	@GetMapping("/api/services")
+	@GetMapping("/users/services")
 	public String listServices(Model model) {
 		List<VadServices> services = servicesRepository.findAll();
 		model.addAttribute("services", services);
 		
-		return "/api/services";
+		return "users/services";
 	}
 	
 

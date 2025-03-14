@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Quản lý thông tin bác sĩ</title>
+<!-- Liên kết tới CSS của dashboard (chứa layout chung) -->
+<link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
+<!-- Liên kết tới CSS riêng của sidebar -->
+<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+	<!-- Bao bọc toàn bộ trang theo cấu trúc flex như dashboard -->
+	<div class="wrapper"
+		style="display: flex; min-height: 100vh; background: #f9fafb;">
+
+		<div th:replace="~{admin/sidebar :: sidebar}"></div>
+
+		<!-- Nội dung chính -->
+		<main class="main-content">
+			<div class="container mt-5">
+				<h1 class="mb-4 text-center">Danh sách thông tin bác sĩ</h1>
+
+				<!-- Nút tạo mới (nếu bạn có chức năng tạo người dùng) -->
+				<div class="mb-3 text-right">
+					<a th:href="@{/admin/doctors/doctors/create}"
+						class="btn btn-primary">Thêm mới thông tin bác sĩ</a>
+
+				</div>
+
+				<!-- Bảng hiển thị danh sách bác sĩ -->
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Ảnh</th>
+								<th>Họ tên</th>
+								<th>Chuyên ngành</th>
+								<th>Số điện thoại</th>
+								<th>Email</th>
+								<th>Kinh nghiệm</th>
+								<th>Hành động</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- Lặp qua từng user -->
+							<tr th:each="doctor : ${doctors}">
+								<td th:text="${doctor.id}"></td>
+								<td><img th:src="@{'/images/' + ${doctor.photo}}"
+									alt="Ảnh bác sĩ" style="max-width: 100px; max-height: 100px;">
+								</td>
+								<td th:text="${doctor.fullname}"></td>
+								<td th:text="${doctor.specialty}"></td>
+								<td th:text="${doctor.phone}"></td>
+								<td th:text="${doctor.email}"></td>
+								<td th:text="${doctor.experience}"></td>
+
+								<td>
+									<!-- Nút Chỉnh sửa --> <a
+									th:href="@{'/admin/doctors/doctors/edit/' + ${doctor.id}}"
+									class="btn btn-sm btn-warning" style="min-width: 100px">
+										Chỉnh sửa </a> <!-- Nút Xóa --> <a
+									th:href="@{'/admin/doctors/doctors/delete/' + ${doctor.id}}"
+									class="btn btn-sm btn-danger" style="min-width: 100px"
+									onclick="return confirm('Bạn có chắc chắn muốn xóa bác sĩ này không?');">
+										Xóa </a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+		</main>
+	</div>
+
+	<!-- Bootstrap JS và các phụ thuộc (jQuery, Popper.js) qua CDN -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

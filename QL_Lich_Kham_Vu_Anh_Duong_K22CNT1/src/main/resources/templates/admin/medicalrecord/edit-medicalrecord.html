@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Chỉnh sửa hồ sơ bệnh nhân</title>
+  <link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
+  <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="wrapper" style="display: flex; min-height: 100vh;">
+    <!-- Nhúng sidebar -->
+    <div th:replace="~{admin/sidebar :: sidebar}"></div>
+    <main class="main-content">
+      <div class="container mt-5">
+        <h1 class="mb-4 text-center">Chỉnh sửa hồ sơ bệnh nhân</h1>
+        <form th:action="@{/admin/medicalrecord/medicalrecord/edit/{id}(id=${medicalRecord.id})}" 
+              th:object="${medicalRecord}" method="post">
+          
+          <!-- Thông tin bệnh nhân -->
+          <div class="form-group">
+            <label>Họ tên bệnh nhân</label>
+            <input type="text" th:value="${medicalRecord.user.fullname}" class="form-control" readonly>
+          </div>
+          
+          <!-- Thông tin bác sĩ -->
+          <div class="form-group">
+            <label>Tên bác sĩ</label>
+            <input type="text" th:value="${medicalRecord.doctor.fullname}" class="form-control" readonly>
+          </div>
+          
+          <!-- Thông tin cuộc hẹn: Cho phép chỉnh sửa ngày và giờ -->
+          <!-- Gửi kèm ID của appointment để controller biết đối tượng cần cập nhật -->
+          <input type="hidden" th:field="*{appointment.id}" />
+          <div class="form-group">
+            <label>Ngày hẹn</label>
+            <input type="date" th:field="*{appointment.vadDate}" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Giờ hẹn</label>
+            <input type="time" th:field="*{appointment.vadTime}" class="form-control">
+          </div>
+          
+          <!-- Chỉnh sửa thông tin hồ sơ -->
+          <div class="form-group">
+            <label>Chẩn đoán</label>
+            <textarea th:field="*{diagnosis}" class="form-control" placeholder="Nhập chẩn đoán"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Đơn thuốc</label>
+            <textarea th:field="*{prescription}" class="form-control" placeholder="Nhập đơn thuốc"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Ghi chú</label>
+            <textarea th:field="*{notes}" class="form-control" placeholder="Nhập ghi chú"></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Cập nhật hồ sơ</button>
+          <a th:href="@{/admin/medicalrecord/medicalrecord}" class="btn btn-secondary">Hủy</a>
+        </form>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Các thư viện JS cần thiết -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

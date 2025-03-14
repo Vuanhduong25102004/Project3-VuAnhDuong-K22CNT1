@@ -10,12 +10,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.model.VadAppointments;
-import com.model.VadAppointments.vadStatus;
 import com.model.VadDoctors;
 import com.model.VadUser;
 import com.repository.VadAppointmentsRepository;
@@ -25,7 +23,7 @@ import com.repository.VadUserRepository;
 
 
 @Controller
-public class AppointmentController {
+public class VadAppointmentController {
     @Autowired
     private VadDoctorsRepository doctorsRepository; // Service lấy danh sách bác sĩ từ database
     
@@ -35,7 +33,6 @@ public class AppointmentController {
     @Autowired 
     private VadUserRepository userRepository;
    
-    // Đổi mapping từ "/" thành "/appointments"
     @GetMapping("/appointments")
     public String appointmenDoctors(Model model) {
         List<VadDoctors> doctors = doctorsRepository.findAll();
@@ -50,18 +47,15 @@ public class AppointmentController {
         @RequestParam("Vadtime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time,
         Principal principal // Lấy user đăng nhập
     ) {
-        // Kiểm tra người dùng đã đăng nhập chưa
         if (principal == null) {
             throw new RuntimeException("Người dùng chưa đăng nhập");
         }
 
-        // Lấy user từ database dựa vào email hoặc username
         VadUser user = userRepository.findByEmail(principal.getName());
         if (user == null) {
             throw new RuntimeException("Không tìm thấy người dùng trong hệ thống");
         }
 
-        // Lấy thông tin bác sĩ từ database
         VadDoctors doctor = doctorsRepository.findById(doctorId)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy bác sĩ"));
 
@@ -78,6 +72,8 @@ public class AppointmentController {
 
         return "redirect:/?success=true";
     }
+    
+    
     
 }
 

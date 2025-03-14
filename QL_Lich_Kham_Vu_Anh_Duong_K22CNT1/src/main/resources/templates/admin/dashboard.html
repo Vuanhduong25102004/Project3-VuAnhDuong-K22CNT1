@@ -1,69 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Dashboard</title>
-  <!-- Liên kết tới CSS của trang chính -->
-  <link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
-  <!-- Liên kết tới CSS của sidebar -->
-  <link rel="stylesheet" th:href="@{/css/sidebar.css}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+<!-- Liên kết tới CSS của trang chính -->
+<link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
+
+<!-- Liên kết tới CSS của sidebar -->
+<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>  
-<div class="wrapper" style="display: flex; min-height: 100vh; background: #f9fafb;">
-  <!-- Nhúng sidebar từ file sidebar.html -->
-  <div th:replace="~{admin/sidebar :: sidebar}"></div>
+<body>
+	<div class="wrapper"
+		style="display: flex; min-height: 100vh; background: #f9fafb;">
+		<!-- Nhúng sidebar từ file sidebar.html -->
+		<div th:replace="~{admin/sidebar :: sidebar}"></div>
 
-  <!-- Phần nội dung chính -->
-  <main class="main-content">
-    <div class="page-header">
-      <h2>Phòng khám Thiên An</h2>
-      <div class="sub-info">
-        <span class="status-badge">Certified</span>
-        <p>Manager: <strong>Jessica Parker</strong></p>
-      </div>
-    </div>
+		<!-- Phần nội dung chính -->
+		<main class="main-content">
+			<div class="page-header">
+				<h2>Phòng khám Thiên An</h2>
+				<div class="sub-info">
+					<span class="status-badge">Đã cấp phép</span>
+					<p>
+						Quản lý: <strong th:text="${currentUser.fullname}"></strong>
+					</p>
+				</div>
+			</div>
 
-    <div class="card">
-      <div class="chart">
-        <p>Biểu đồ ngân sách (placeholder)</p>
-      </div>
-    </div>
+			<!-- Biểu đồ thật -->
+			<div class="card">
+				<h3>Biểu đồ doanh thu</h3>
+				<div class="chart" style="width: 100%; height: 400px;">
+					<canvas id="budgetChart"></canvas>
+				</div>
+			</div>
 
-    <div class="card">
-      <h3>Consolidated Budget</h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Deals</th>
-            <th>Email</th>
-            <th>Cost</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Academic Project</td>
-            <td>academic@example.com</td>
-            <td>$3,452</td>
-            <td><span class="tag in-progress">In Progress</span></td>
-          </tr>
-          <tr>
-            <td>Back Menu Production</td>
-            <td>production@example.com</td>
-            <td>$1,238</td>
-            <td><span class="tag completed">Completed</span></td>
-          </tr>
-          <tr>
-            <td>Product Launch</td>
-            <td>launch@example.com</td>
-            <td>$5,102</td>
-            <td><span class="tag in-progress">In Progress</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </main>
-   </div>
+
+			<div class="card">
+				<h3>Ngân sách tổng hợp</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Deals</th>
+							<th>Email</th>
+							<th>Cost</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Academic Project</td>
+							<td>academic@example.com</td>
+							<td>88.120.930 VNĐ</td>
+							<td><span class="tag in-progress">Đang tiến hành </span></td>
+						</tr>
+						<tr>
+							<td>Back Menu Production</td>
+							<td>production@example.com</td>
+							<td>31.603.045 VNĐ</td>
+							<td><span class="tag completed">Đã hoàn thành</span></td>
+						</tr>
+						<tr>
+							<td>Product Launch</td>
+							<td>launch@example.com</td>
+							<td>130.241.305 VNĐ</td>
+							<td><span class="tag in-progress">Đang tiến hành </span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</main>
+	</div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('budgetChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],
+            datasets: [{
+                label: 'Doanh thu (triệu VNĐ)',
+                data: [10, 20, 15, 25, 40],
+                backgroundColor: 'rgba(54, 162, 235, 0.6)'
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});
+</script>
+
 </html>

@@ -16,12 +16,12 @@ public class VadDoctorsController {
 	@Autowired
 	private VadDoctorsRepository doctorsRepository;
 	
-	@GetMapping("/api/doctors")
+	@GetMapping("/users/doctors")
 	public String listDoctors(Model model) {
 		List<VadDoctors> doctors = doctorsRepository.findAll();
 		
 		model.addAttribute("doctors", doctors);
-        return "api/doctors"; 
+        return "users/doctors"; 
 	}
 
 }

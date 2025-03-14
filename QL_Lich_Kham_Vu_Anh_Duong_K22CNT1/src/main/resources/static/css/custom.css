@@ -1,0 +1,187 @@
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  color: #333;
+  background-color: #fff;
+}
+.navbar-brand img {
+  /* Chiều cao và chiều rộng auto để giữ tỷ lệ ảnh */
+  height: 10px;
+  width: 10px;
+
+  /* Giới hạn chiều cao tối đa, tránh logo quá lớn */
+  max-height: 10px; 
+}
+
+.display-4{
+	color: #5a5a5a;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #fff; 
+  border-bottom: 1px solid #eee;
+}
+
+/* Banner (hero) */
+.banner {
+  position: relative; 
+  z-index: 1;        
+  overflow: hidden;  
+  background: #f5f5f5;
+  padding: 80px 20px;
+  text-align: center;
+
+}
+
+/* Nội dung bên trong banner */
+.banner-content {
+  position: relative; 
+  z-index: 2;     
+  color: #fff;       
+}
+
+/* Pseudo-element chứa ảnh nền */
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  background: url('/images/background1.jpg')  repeat-x center center;
+  background-size: cover;
+  opacity: 0.5;  
+}
+
+@keyframes slideBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+.banner h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.banner p.lead {
+  font-size: 1.1rem;
+  color: #1b1b1b;
+  margin-bottom: 30px;
+}
+.banner .btn.btn-primary {
+  background-color: #1abc9c;
+  border-color: #1abc9c;
+  font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+}
+.banner .btn.btn-primary:hover {
+  background-color: #16a085;
+  border-color: #16a085;
+}
+
+/* Tiêu đề section */
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  position: relative;
+  color: #333;
+}
+
+section h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #1abc9c;
+  margin: 10px 0;
+}
+
+/* Card */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-body {
+    padding: 20px;
+    text-align: left;
+}
+
+.card i {
+    font-size: 24px;
+    color: #38a169; /* Màu xanh lá */
+    background: #e6f4ea; /* Nền xanh lá nhạt */
+    padding: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #10733b; /* Màu xanh lá đậm */
+    margin-top: 10px;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
+
+.card a {
+    color: #10733b;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+/* Footer */
+footer {
+  background-color: #f8f8f8;
+  border-top: 1px solid #ddd;
+  padding: 20px 0;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+#successMessage {
+  margin-top: 20px;
+}
+.modal-header, .modal-footer {
+  border: none;
+}
+
+.button-see-more {
+  display: inline-block;           
+  padding: 0.5rem 1rem;
+  border: 1px solid #10733b;      
+  color: #10733b;                 
+  background-color: transparent; 
+  text-decoration: none;         
+  border-radius: 4px;             
+  transition: all 0.2s ease;      
+}
+
+.button-see-more:hover {
+  background-color: #10733b; 
+  color: #fff;             
+}
+
+

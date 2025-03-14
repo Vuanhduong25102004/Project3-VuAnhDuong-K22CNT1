@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Tạo mới Dịch vụ</title>
+  <title>Tạo mới dịch vụ</title>
   <link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
   <link rel="stylesheet" th:href="@{/css/sidebar.css}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -11,7 +11,7 @@
     <div th:replace="~{admin/sidebar :: sidebar}"></div>
     <main class="main-content">
       <div class="container mt-5">
-        <h1 class="mb-4 text-center">Tạo mới Dịch vụ</h1>
+        <h1 class="mb-4 text-center">Tạo mới dịch vụ</h1>
         <form th:action="@{/admin/services/services/create}" th:object="${service}" method="post">
           <div class="form-group">
             <label for="name">Tên dịch vụ</label>

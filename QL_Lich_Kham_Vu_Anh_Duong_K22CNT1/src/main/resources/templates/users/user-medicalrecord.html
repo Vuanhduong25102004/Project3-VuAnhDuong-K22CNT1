@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Hồ sơ bệnh của bạn</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<th:block th:replace="~{header :: headerStyles}"></th:block>
+<th:block th:replace="~{footer :: footerStyles}"></th:block>
+<link rel="stylesheet" th:href="@{/css/custom.css}" />
+</head>
+<body>
+	<th:block th:replace="~{header :: header}"></th:block>
+	<div class="container mt-5">
+		<div th:if="${error}" class="alert alert-danger" role="alert">
+			<span th:text="${error}"></span>
+		</div>
+		<!-- Phần giới thiệu -->
+		<div class="mb-4">
+			<div class="card">
+				<div class="card-body">
+					<h2 class="card-title">Chào mừng đến với hệ thống hồ sơ bệnh</h2>
+					<p class="card-text">Tại đây, bạn có thể xem thông tin cá nhân,
+						lịch sử khám bệnh, nhận tư vấn sức khỏe và cập nhật tin tức y tế
+						mới nhất.</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Thông tin cá nhân -->
+		<div class="mb-4">
+			<h2>Thông tin cá nhân</h2>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card">
+						<!-- Ảnh đại diện người dùng -->
+						<img src="/images/userimg.png" class="card-img-top"
+							alt="Ảnh đại diện"
+							style="width: auto; height: auto; max-height: 200px; object-fit: cover; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${user.fullname}">Tên bệnh
+								nhân</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<ul class="list-group">
+						<li class="list-group-item"><strong>Số điện thoại:</strong> <span
+							th:text="${user.phone}"></span></li>
+						<li class="list-group-item"><strong>Email:</strong> <span
+							th:text="${user.email}"></span></li>
+						<li class="list-group-item"><strong>Vai trò:</strong> <span
+							th:text="${user.vadrole}"></span></li>
+						<a class="btn btn-primary edit-btn" data-bs-toggle="modal"
+							data-bs-target="#editUserModal"> Sửa thông tin </a>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- Hồ sơ bệnh -->
+		<div class="mb-4">
+			<h2>Hồ sơ bệnh của bạn</h2>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>STT</th>
+						<th>Ngày tạo</th>
+						<th>Bác sĩ</th>
+						<th>Chẩn đoán</th>
+						<th>Đơn thuốc</th>
+						<th>Ghi chú</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="record, stat : ${medicalRecords}">
+						<td th:text="${stat.index + 1}"></td>
+						<td
+							th:text="${#temporals.format(record.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+						<td th:text="${record.doctor.fullname}">Tên bác sĩ</td>
+						<td th:text="${record.diagnosis}">Chẩn đoán</td>
+						<td th:text="${record.prescription}">Đơn thuốc</td>
+						<td th:text="${record.notes}">Ghi chú</td>
+					</tr>
+					<tr
+						th:if="${medicalRecords == null or #lists.isEmpty(medicalRecords)}">
+						<td colspan="6" class="text-center">Không có hồ sơ bệnh nào.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="mb-4">
+			<h1>Lịch khám của bạn</h1>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>STT</th>
+						<th>Ngày</th>
+						<th>Thời gian</th>
+						<th>Bác sĩ</th>
+						<th>Trạng thái</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="appointment, stat : ${appointments}">
+						<td th:text="${stat.index + 1}"></td>
+						<td
+							th:text="${#temporals.format(appointment.vadDate, 'dd/MM/yyyy')}"></td>
+						<td th:text="${appointment.vadTime}"></td>
+						<td th:text="${appointment.doctor.fullname}">Tên bác sĩ</td>
+						<td th:text="${appointment.vadStatus}"></td>
+					</tr>
+					<tr th:if="${appointments == null or #lists.isEmpty(appointments)}">
+						<td colspan="5" class="text-center">Không có lịch khám nào
+							được đặt.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- Tư vấn sức khỏe -->
+		<div class="mb-4">
+			<h2>Tư vấn sức khỏe</h2>
+			<div class="row">
+				<!-- Tư vấn dinh dưỡng -->
+				<div class="col-md-4">
+					<div class="card">
+						<img
+							src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+							class="card-img-top" alt="Tư vấn dinh dưỡng">
+						<div class="card-body">
+							<h5 class="card-title">Tư vấn dinh dưỡng</h5>
+							<p class="card-text">Hãy duy trì một chế độ ăn uống cân bằng
+								với đầy đủ chất dinh dưỡng.</p>
+							<a href="#" class="button-see-more">Xem thêm</a>
+						</div>
+					</div>
+				</div>
+				<!-- Tập luyện thể dục -->
+				<div class="col-md-4">
+					<div class="card">
+						<img
+							src="https://images.unsplash.com/photo-1607962837359-5e7e89f86776?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							class="card-img-top" alt="Tập luyện thể dục">
+						<div class="card-body">
+							<h5 class="card-title">Tập luyện thể dục</h5>
+							<p class="card-text">Thể dục đều đặn giúp cải thiện sức khỏe
+								tim mạch và tinh thần.</p>
+							<a href="#" class="button-see-more">Xem thêm</a>
+						</div>
+					</div>
+				</div>
+				<!-- Giấc ngủ chất lượng -->
+				<div class="col-md-4">
+					<div class="card">
+						<img
+							src="https://plus.unsplash.com/premium_photo-1661397087554-2774b7e7332f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							class="card-img-top" alt="Giấc ngủ chất lượng">
+						<div class="card-body">
+							<h5 class="card-title">Giấc ngủ và sức khỏe</h5>
+							<p class="card-text">Giấc ngủ đủ và chất lượng là chìa khóa
+								để duy trì sức khỏe tốt.</p>
+							<a href="#" class="button-see-more">Xem thêm</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Tin tức y tế -->
+		<div class="mb-4">
+			<h2>Tin tức y tế</h2>
+			<div class="list-group">
+				<a href="#" class="list-group-item list-group-item-action">
+					<h5 class="mb-1">Tin tức 1: Phát hiện mới trong nghiên cứu ung
+						thư</h5>
+					<p class="mb-1">Các chuyên gia y tế đã phát hiện ra một phương
+						pháp điều trị mới đầy hứa hẹn.</p> <small>Ngày đăng:
+						13/03/2025</small>
+				</a> <a href="#" class="list-group-item list-group-item-action">
+					<h5 class="mb-1">Tin tức 2: Công nghệ y tế và tương lai của
+						chăm sóc sức khỏe</h5>
+					<p class="mb-1">Công nghệ đang thay đổi cách chúng ta tiếp cận
+						và chăm sóc sức khỏe.</p> <small>Ngày đăng: 12/03/2025</small>
+				</a> <a href="#" class="list-group-item list-group-item-action">
+					<h5 class="mb-1">Tin tức 3: Các xu hướng mới trong y học hiện
+						đại</h5>
+					<p class="mb-1">Xu hướng hiện đại trong y học đem lại nhiều cải
+						tiến cho bệnh nhân.</p> <small>Ngày đăng: 11/03/2025</small>
+				</a>
+			</div>
+		</div>
+
+		<!-- Phản hồi của bạn -->
+		<div class="mb-4">
+			<h2>Phản hồi của bạn</h2>
+			<form>
+				<div class="mb-3">
+					<label for="feedback" class="form-label">Nhận xét</label>
+					<textarea class="form-control" id="feedback" rows="3"
+						placeholder="Nhập phản hồi của bạn ở đây..."></textarea>
+				</div>
+				<button type="submit" class="btn btn-success">Gửi phản hồi</button>
+			</form>
+		</div>
+		<!-- Modal cho sửa thông tin (giữ nguyên) -->
+		<div class="modal fade" id="editUserModal" tabindex="-1"
+			aria-labelledby="editUserModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form th:action="@{/users/edit}" th:object="${user}" method="post">
+						<div class="modal-header">
+							<h5 class="modal-title" id="editUserModalLabel">Sửa thông
+								tin người dùng</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Đóng"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<label for="fullname" class="form-label">Họ tên</label> <input
+									type="text" class="form-control" id="fullname"
+									th:field="*{fullname}" required>
+							</div>
+							<div class="mb-3">
+								<label for="email" class="form-label">Email</label> <input
+									type="email" class="form-control" id="email"
+									th:field="*{email}" required readonly>
+							</div>
+							<div class="mb-3">
+								<label for="phone" class="form-label">Số điện thoại</label> <input
+									type="text" class="form-control" id="phone" th:field="*{phone}"
+									required>
+							</div>
+							<div class="mb-3">
+								<label for="currentPassword" class="form-label"> Nhập
+									mật khẩu hiện tại </label> <input type="password" class="form-control"
+									id="currentPassword" name="currentPassword" required>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">Đóng</button>
+							<button type="submit" class="btn btn-primary">Lưu thay
+								đổi</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<th:block th:replace="~{footer :: footer}"></th:block>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script th:if="${error != null}">
+        var myModal = new bootstrap.Modal(document.getElementById('editUserModal'));
+        myModal.show();
+    </script>
+
+	<th:block th:replace="~{footer :: footer}"></th:block>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous">
+    </script>
+</body>
+</html>

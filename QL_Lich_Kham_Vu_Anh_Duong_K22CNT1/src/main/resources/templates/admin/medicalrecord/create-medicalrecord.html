@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Tạo mới hồ sơ bệnh nhân</title>
+  <link rel="stylesheet" th:href="@{/css/styleDashboard.css}">
+  <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="wrapper" style="display: flex; min-height: 100vh; background: #f9fafb;">
+    <!-- Nhúng sidebar -->
+    <div th:replace="~{admin/sidebar :: sidebar}"></div>
+    <main class="main-content">
+      <div class="container mt-5">
+        <h1 class="mb-4 text-center">Tạo mới hồ sơ bệnh nhân</h1>
+        <form th:action="@{/admin/medicalrecord/medicalrecord/create}" th:object="${medicalRecord}" method="post">
+          <!-- Chọn bệnh nhân -->
+          <div class="form-group">
+            <label for="user">Bệnh nhân</label>
+            <select id="user" th:field="*{user.id}" class="form-control" required>
+              <option value="">-- Chọn bệnh nhân --</option>
+              <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.fullname}"></option>
+            </select>
+          </div>
+          <!-- Chọn bác sĩ -->
+          <div class="form-group">
+            <label for="doctor">Bác sĩ</label>
+            <select id="doctor" th:field="*{doctor.id}" class="form-control" required>
+              <option value="">-- Chọn bác sĩ --</option>
+              <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.fullname}"></option>
+            </select>
+          </div>
+          <!-- Chọn cuộc hẹn -->
+          <div class="form-group">
+            <label for="appointment">Cuộc hẹn</label>
+            <select id="appointment" th:field="*{appointment.id}" class="form-control" required>
+              <option value="">-- Chọn cuộc hẹn --</option>
+              <option th:each="appointment : ${appointments}" 
+                      th:value="${appointment.id}"
+                      th:text="${#temporals.format(appointment.vadDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(appointment.vadTime, 'HH:mm')}">
+              </option>
+            </select>
+          </div>
+          <!-- Chẩn đoán -->
+          <div class="form-group">
+            <label for="diagnosis">Chẩn đoán</label>
+            <textarea th:field="*{diagnosis}" class="form-control" id="diagnosis" placeholder="Nhập chẩn đoán" required></textarea>
+          </div>
+          <!-- Đơn thuốc -->
+          <div class="form-group">
+            <label for="prescription">Đơn thuốc</label>
+            <textarea th:field="*{prescription}" class="form-control" id="prescription" placeholder="Nhập đơn thuốc" required></textarea>
+          </div>
+          <!-- Ghi chú -->
+          <div class="form-group">
+            <label for="notes">Ghi chú</label>
+            <textarea th:field="*{notes}" class="form-control" id="notes" placeholder="Nhập ghi chú"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Tạo mới</button>
+          <a th:href="@{/admin/medicalrecord/medicalrecord}" class="btn btn-secondary">Hủy</a>
+        </form>
+      </div>
+    </main>
+  </div>
+  <!-- Các thư viện JS cần thiết -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

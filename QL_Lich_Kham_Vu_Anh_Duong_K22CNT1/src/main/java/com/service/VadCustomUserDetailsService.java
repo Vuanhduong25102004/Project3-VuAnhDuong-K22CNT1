@@ -13,20 +13,18 @@ import com.model.VadUser;
 import com.repository.VadUserRepository;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class VadCustomUserDetailsService implements UserDetailsService {
 	
 	@Autowired
     private VadUserRepository vadUserRepository;
     
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        VadUser user = vadUserRepository.findByEmail(email);
+    	VadUser user = vadUserRepository.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("Không tìm thấy người dùng với email: " + email);
         }
-
-
-        // Chuyển đổi giá trị enum từ cơ sở dữ liệu thành GrantedAuthority
+        // Sử dụng biến user sau khi đã khai báo
         String role = "ROLE_" + user.getVadrole().name().toUpperCase();
         return new org.springframework.security.core.userdetails.User(
             user.getEmail(),

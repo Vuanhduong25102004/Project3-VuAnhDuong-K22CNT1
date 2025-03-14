@@ -1,25 +1,22 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <body>
-    <!-- Fragment chứa CSS bổ sung cho footer nếu cần -->
-    <th:block th:fragment="footerStyles">
-      <style>
-        /* Nếu muốn tùy chỉnh thêm ngoài class của Bootstrap */
+<!-- footer.html -->
+<!-- Fragment chứa CSS bổ sung cho footer -->
+<th:block th:fragment="footerStyles">
+    <style>
+        /* Nếu muốn tuỳ chỉnh thêm ngoài class của Bootstrap */
         footer {
-          border-top: 1px solid #ddd;
-          font-size: 14px;
-          color: #777;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            color: #777;
         }
-      </style>
-    </th:block>
+    </style>
+</th:block>
 
-    <!-- Fragment cho footer sử dụng Bootstrap -->
-    <div th:fragment="footer">
-      <footer class="bg-light py-3 mt-5">
+<!-- Fragment cho footer -->
+<th:block th:fragment="footer">
+    <footer class="bg-light py-3 mt-5">
         <div class="container text-center">
-          <p class="mb-0">&copy; 2025 - Công ty của bạn</p>
+            <p class="mb-0">&copy; 2025 - Vũ Anh Dương</p>
         </div>
-      </footer>
-    </div>
-  </body>
-</html>
+    </footer>
+</th:block>
+

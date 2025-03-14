@@ -1,0 +1,110 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  color: #333;
+  background-color: #fff;
+}
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    overflow: hidden;
+    border: none;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    text-align: center;
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #007b5e;
+}
+
+.card-text {
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.card-footer {
+    background: #fff;
+    border-top: none;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #28a745;
+}
+/* Nền tràn hết chiều ngang và kéo dài đến footer */
+.bg-full-width {
+    background-color: #f7fffa; /* Màu nền */
+    width: 100%;  /* Tràn hết chiều ngang */
+    padding: 60px 0; /* Khoảng cách trên dưới */
+}
+
+/* Đảm bảo phần nội dung không dính sát mép */
+
+
+/* Căn giữa nội dung */
+.row {
+    align-items: center;
+}
+
+/* Định dạng ảnh */
+.img-fluid {
+    max-width: 80%;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* Responsive: Mobile sẽ căn giữa nội dung */
+@media (max-width: 768px) {
+    .row {
+        text-align: center;
+    }
+    .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    img {
+        max-width: 100%;
+    }
+}
+.btn-outline-custom {
+    color: #047857; /* Màu chữ */
+    border: 1px solid #047857; /* Viền màu xanh lá */
+    border-radius: 50px; /* Bo góc tròn */
+    padding: 10px 20px; /* Kích thước nút */
+    font-size: 16px; /* Cỡ chữ */
+    font-weight: 500; /* Độ đậm chữ */
+    background-color: transparent; /* Nền trong suốt */
+    transition: all 0.3s ease-in-out;
+    margin-bottom:40px;
+}
+
+.btn-outline-custom:hover {
+    background-color: #047857; /* Màu nền khi hover */
+    color: white; /* Màu chữ khi hover */
+}

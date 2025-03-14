@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Đăng nhập</title>
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+	<div class= "container" id="container">
+		<!--form dang ky-->
+		<div class="form-container sign-up-container">
+			<form th:action="@{/register}" th:object="${vadUser}" method="post">
+				<h1>Đăng Ký</h1>
+			<!-- 	<div class="social-container">
+		          <a href="#"><i class="fab fa-google"></i>G</a>
+		          <a href="#"><i class="fab fa-facebook"></i>F</a>
+		          <a href="#"><i class="fab fa-github"></i>Gh</a>
+		        </div> -->
+				<span>Hoặc sử dụng email của bạn</span>
+                <input type="text" th:field="*{fullname}" placeholder="Họ và tên" required/>
+                <input type="email" th:field="*{email}" placeholder="Email" required/>
+                <input type="text" th:field="*{phone}" placeholder="Số điện thoại" required/>
+                <input type="password" th:field="*{password}" placeholder="Mật khẩu" required/>
+				<button type="submit">Đăng ký</button>
+			</form>
+		</div>
+		<!-- form dang nhap -->
+	    <div class="form-container sign-in-container">
+	      <form th:action="@{/login}" method="post">
+	        <h1>Đăng Nhập</h1>
+	       <!--  <div class="social-container">
+	          <a href="#"><i class="fab fa-google"></i>G</a>
+	          <a href="#"><i class="fab fa-facebook"></i>F</a>
+	          <a href="#"><i class="fab fa-github"></i>Gh</a>
+	        </div> -->
+	        <span>hoặc sử dụng tài khoản của bạn</span>
+	        <input type="email" placeholder="Email" name="username" required />
+	        <input type="password" placeholder="Password" name="password" required />
+	        <a class="forgot-pass" href="#">Quên mật khẩu?</a>
+	        <button type="submit">Đăng nhập</button>
+	      </form>
+	    </div>
+	    <!-- khoi overlay -->
+	    <div class="overlay-container">
+	      <div class="overlay">
+	        <!-- Panel dành cho người đã có tài khoản (muốn chuyển sang đăng nhập) -->
+	        <div class="overlay-panel overlay-left">
+	          <h1>Chào mừng trở lại!</h1>
+	          <p>Nếu bạn đã có tài khoản, hãy đăng nhập để kết nối cùng chúng tôi.</p>
+	          <button class="ghost" id="signIn">Đăng nhập</button>
+	        </div>
+	        <!-- Panel dành cho người chưa có tài khoản (muốn chuyển sang đăng ký) -->
+	        <div class="overlay-panel overlay-right">
+	          <h1>Xin chào!</h1>
+	          <p>Bạn chưa có tài khoản? Hãy đăng ký ngay để trải nghiệm dịch vụ.</p>
+	          <button class="ghost" id="signUp">Đăng ký</button>
+	        </div>
+	      </div>
+	    </div>
+	 </div>
+	 
+	 <script th:src="@{/js/script.js}"></script>
+	 <script 
+	    th:src="@{https://kit.fontawesome.com/your_font_awesome_kit.js}" 
+	    crossorigin="anonymous">
+	  </script>
+</body>
+</html>

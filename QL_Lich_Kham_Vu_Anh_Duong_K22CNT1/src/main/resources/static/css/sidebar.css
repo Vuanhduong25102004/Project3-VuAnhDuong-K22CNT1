@@ -72,3 +72,7 @@
 .sidebar-footer a:hover {
   color: #1a73e8;
 }
+.table td, .table th {
+  text-align: center;       /* Căn giữa ngang */
+  vertical-align: middle;   /* Căn giữa dọc */
+}

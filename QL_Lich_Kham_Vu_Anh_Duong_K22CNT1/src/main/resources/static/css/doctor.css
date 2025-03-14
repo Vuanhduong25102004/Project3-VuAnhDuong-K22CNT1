@@ -1,0 +1,139 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  color: #333;
+  background-color: #fff;
+}
+/* Thẻ card nhỏ gọn */
+
+/* Tiêu đề trang */
+h1 {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+}
+
+/* ========== CARD PHONG CÁCH OUR TEAM ========== */
+.team-card {
+    border: none;           /* Bỏ viền mặc định */
+    border-radius: 12px;    /* Bo góc thẻ */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    overflow: hidden;       /* Bo góc ảnh nếu vượt */
+    display: flex; 
+    flex-direction: column; /* Xếp dọc */
+    height: 100%;           /* Để footer đẩy xuống đáy */
+}
+
+/* Ảnh ở trên, bo tròn, canh giữa */
+.team-img {
+    width: 100%;
+    height: 240px;              /* Chiều cao ảnh cố định, tuỳ chỉnh */
+    object-fit: cover;          /* Ảnh fill hết khung */
+    object-position: center;    /* Canh giữa ảnh */
+}
+
+/* Phần body */
+.team-card .card-body {
+    text-align: center;
+    flex: 1; /* Giúp footer luôn nằm cuối */
+    padding: 15px;
+}
+
+.team-card .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.specialty {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.contact {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* Footer (chứa nút) ở cuối card */
+.team-card .card-footer {
+    text-align: center;
+    border-top: none; 
+    background-color: #fff; 
+    margin-top: auto; 
+    padding: 10px 15px;
+}
+
+/* Nút "Xem đánh giá" */
+.btn-review {
+    display: inline-block;           
+  padding: 0.5rem 1rem;
+  border: 1px solid #10733b;      
+  color: #10733b;                 
+  background-color: transparent; 
+  text-decoration: none;         
+  border-radius: 4px;             
+  transition: all 0.2s ease; 
+}
+
+.btn-review:hover {
+    background-color: #10733b; 
+    color:#fff;/* Tối màu hơn khi hover */
+}
+.bg-full-width {
+    background-color: #f7fffa; /* Màu nền */
+    width: 100%; /* Tràn hết chiều ngang */
+    padding: 60px 0; /* Khoảng cách trên dưới */
+    margin-top: 150px;
+}
+
+/* Đảm bảo phần nội dung không dính sát mép */
+
+
+/* Căn giữa nội dung */
+.row {
+    align-items: center;
+}
+
+/* Định dạng ảnh */
+.img-fluid {
+    max-width: 80%;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* Responsive: Mobile sẽ căn giữa nội dung */
+@media (max-width: 768px) {
+    .row {
+        text-align: center;
+    }
+    .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    img {
+        max-width: 100%;
+    }
+}
+.btn-outline-custom {
+    color: #047857; /* Màu chữ */
+    border: 1px solid #047857; /* Viền màu xanh lá */
+    border-radius: 50px; /* Bo góc tròn */
+    padding: 10px 20px; /* Kích thước nút */
+    font-size: 16px; /* Cỡ chữ */
+    font-weight: 500; /* Độ đậm chữ */
+    background-color: transparent; /* Nền trong suốt */
+    transition: all 0.3s ease-in-out;
+    margin-bottom:40px;
+}
+
+.btn-outline-custom:hover {
+    background-color: #047857; /* Màu nền khi hover */
+    color: white; /* Màu chữ khi hover */
+}
